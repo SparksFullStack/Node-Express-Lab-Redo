@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import Post from './Post';
 
 class PostList extends Component {
-    componentWillMount(){
-
+    mapPosts = () => {
+        return this.props.posts.map(post => <Post key={`${post.title}_${post.id}`} post={post}/>)
     }
 
     render(){
+        console.log(this.props.posts)
         return(
             <div>
-                <h1>Post List Nibba</h1>
+                {this.mapPosts()}
             </div>
         )
     }
