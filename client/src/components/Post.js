@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 const Post = ({ post, cardStyles }) => {
     const { title, contents } = post;
     return (
-        <Card style={cardStyles}> 
+        <Card style={cardStyles} color='primary'> 
             <CardBody>
-                <CardTitle>
+                <CardTitle style={{textAlign: 'center'}}>
                     {title}
                 </CardTitle>
                 <CardText>
