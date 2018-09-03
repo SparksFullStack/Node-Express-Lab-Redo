@@ -1,10 +1,3 @@
-/* DB methods:
-* find: no params; returns all entries
-* findById: single ID as param; returns only that entry
-* insert post object as param; returns post's ID
-* update: ID and object with changes as params; returns the # of records updated (1 === successful)
-* remove: ID as param; returns # of records deleted
-*/
 const db = require('./data/db.js');
 
 // importing node modules and router/setting port
