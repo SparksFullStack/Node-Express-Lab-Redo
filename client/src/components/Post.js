@@ -2,15 +2,16 @@ import React from 'react';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-const Post = (props) => {
+const Post = ({ post, cardStyles }) => {
+    const { title, contents } = post;
     return (
-        <Card>
+        <Card style={cardStyles}> 
             <CardBody>
                 <CardTitle>
-
+                    {title}
                 </CardTitle>
                 <CardText>
-
+                    {contents}
                 </CardText>
             </CardBody>
         </Card>
@@ -24,6 +25,10 @@ Post.propTypes = {
         title: PropTypes.string.isRequired,
         created_at: PropTypes.string,
         updated_at: PropTypes.string
+    }),
+    cardStyles: PropTypes.shape({
+        width: PropTypes.string.isRequired,
+        marginTop: PropTypes.number.isRequired
     })
 }
 
