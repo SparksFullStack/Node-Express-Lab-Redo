@@ -34,11 +34,34 @@ const router = (server, db) => {
                 db.findById(response.id)
                     .then(response2 => res.status(200).json(response2[0]));
             })
-            .catch(err => res.status(500).json({ err: "There was an error saving the post to the database." }));
+            .catch(err => res.status(500).json({ error: "There was an error saving the post to the database." }));
     })
 
     // delete to '/api/posts/:id'
+    server.delete('/api/posts/:id', (req, res) => {
+        const { id } = req.params;
+
+        db.remove(id)
+            .then(response => response ? res.status(200).send('The message was successfully deleted') : res.status(404).json({ error: "A post with that ID could not be found"}))
+            .catch(err => res.status(500).json({ error: "There was an error deleting the post on the server--please try again" }));
+    })
+
     // put to '/api/posts/:id'
+    server.put('/api/posts/:id', (req, res) => {
+        const { id } = req.params;
+        const { title, contents } = req.body;  
+
+        if (!title || !contents) return res.status(400).json({ error: "Please provide both title and contents for the post to update." });
+
+        db.update(id, { title, contents })
+            .then(response => {
+                if (!response) return res.status(404).json({ error: "The post with the specified ID does not exist" });
+                db.findById(id)
+                    .then(response2 => res.status(200).json(response2[0]));
+            })
+            .catch(err => res.status(500).json({ error: "There was an error modifying the post" }));
+
+    })
 }
 
 // exporting the router
